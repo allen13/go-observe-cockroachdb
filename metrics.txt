@@ -1,0 +1,42 @@
+# HELP observe_cockroachdb_insert This is my counter
+# TYPE observe_cockroachdb_insert counter
+observe_cockroachdb_insert 138
+# HELP observe_cockroachdb_insert_latency This is my histogram
+# TYPE observe_cockroachdb_insert_latency histogram
+observe_cockroachdb_insert_latency_bucket{le="0.005"} 0
+observe_cockroachdb_insert_latency_bucket{le="0.01"} 0
+observe_cockroachdb_insert_latency_bucket{le="0.025"} 0
+observe_cockroachdb_insert_latency_bucket{le="0.05"} 1
+observe_cockroachdb_insert_latency_bucket{le="0.1"} 5
+observe_cockroachdb_insert_latency_bucket{le="0.25"} 18
+observe_cockroachdb_insert_latency_bucket{le="0.5"} 36
+observe_cockroachdb_insert_latency_bucket{le="1"} 56
+observe_cockroachdb_insert_latency_bucket{le="2.5"} 120
+observe_cockroachdb_insert_latency_bucket{le="5"} 138
+observe_cockroachdb_insert_latency_bucket{le="10"} 138
+observe_cockroachdb_insert_latency_bucket{le="+Inf"} 138
+observe_cockroachdb_insert_latency_sum 186.72416375899994
+observe_cockroachdb_insert_latency_count 138
+# HELP observe_cockroachdb_select_latency This is my histogram
+# TYPE observe_cockroachdb_select_latency histogram
+observe_cockroachdb_select_latency_bucket{le="0.005"} 133
+observe_cockroachdb_select_latency_bucket{le="0.01"} 137
+observe_cockroachdb_select_latency_bucket{le="0.025"} 137
+observe_cockroachdb_select_latency_bucket{le="0.05"} 138
+observe_cockroachdb_select_latency_bucket{le="0.1"} 138
+observe_cockroachdb_select_latency_bucket{le="0.25"} 138
+observe_cockroachdb_select_latency_bucket{le="0.5"} 138
+observe_cockroachdb_select_latency_bucket{le="1"} 138
+observe_cockroachdb_select_latency_bucket{le="2.5"} 138
+observe_cockroachdb_select_latency_bucket{le="5"} 138
+observe_cockroachdb_select_latency_bucket{le="10"} 138
+observe_cockroachdb_select_latency_bucket{le="+Inf"} 138
+observe_cockroachdb_select_latency_sum 0.31036269800000005
+observe_cockroachdb_select_latency_count 138
+# HELP observe_cockroachdb_total_rows This is my gauge
+# TYPE observe_cockroachdb_total_rows gauge
+observe_cockroachdb_total_rows 223
+# HELP fake_http_request_count How many HTTP requests processed, partitioned by status code.
+# TYPE fake_http_request_count counter
+fake_http_request_count{code="200"} 258
+fake_http_request_count{code="500"} 96
