@@ -1,0 +1,4 @@
+image:
+  repository: cockroachdb/cockroach
+  tag: v20.1.5
+  pullPolicy: IfNotPresent

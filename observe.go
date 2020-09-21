@@ -6,6 +6,7 @@ import (
 	"log"
 	"math/rand"
 	"net/http"
+	"os"
 	"time"
 
 	"github.com/jackc/pgx/v4"
@@ -96,9 +97,23 @@ func initTracer() {
 	tracer = opentracing.GlobalTracer()
 }
 
+func getEnvDefault(env string, envDefault string) string {
+	envVal, exists := os.LookupEnv(env)
+	if !exists {
+		envVal = envDefault
+	}
+
+	return envVal
+}
+
 func connect() *pgx.Conn {
-	// Never use root or defaultdb. Example purposes only.
-	config, err := pgx.ParseConfig("postgresql://root@localhost:26257/defaultdb?sslmode=disable")
+
+	pgUser := getEnvDefault("PG_USER", "root")
+	pgHost := getEnvDefault("PG_HOST", "localhost")
+	pgDb := getEnvDefault("PG_DB", "defaultdb")
+
+	connString := fmt.Sprintf("postgresql://%s@%s:26257/%s?sslmode=disable", pgUser, pgHost, pgDb)
+	config, err := pgx.ParseConfig(connString)
 	if err != nil {
 		log.Fatal("error configuring the database: ", err)
 	}

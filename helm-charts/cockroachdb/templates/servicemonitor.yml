@@ -1,0 +1,18 @@
+---
+# Source: cockroachdb/templates/servicemonitor.yml
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: cockroachdb
+  labels:
+    app: cockroachdb
+spec:
+  selector:
+    matchLabels:
+      app: cockroachdb
+  namespaceSelector:
+    any: true
+  endpoints:
+  - port: http
+    path: /_status/vars
+    interval: 10s

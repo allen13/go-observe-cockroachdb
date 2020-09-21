@@ -12,4 +12,6 @@ FROM alpine:3.12.0 AS runner
 
 COPY --from=builder /go/src/observe /usr/bin/observe
 
+EXPOSE 8090
+
 CMD ["/usr/bin/observe"]

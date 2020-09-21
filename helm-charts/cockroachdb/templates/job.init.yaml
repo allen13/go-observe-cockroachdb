@@ -1,0 +1,44 @@
+---
+# Source: cockroachdb/templates/job.init.yaml
+kind: Job
+apiVersion: batch/v1
+metadata:
+  name: cockroachdb-init
+  labels:
+    app: cockroachdb
+spec:
+  template:
+    metadata:
+      labels:
+        app: cockroachdb-init
+    spec:
+      restartPolicy: OnFailure
+      terminationGracePeriodSeconds: 0
+      containers:
+        - name: cluster-init
+          image: "cockroachdb/cockroach:v20.1.5"
+          imagePullPolicy: "IfNotPresent"
+          # Run the command in an `while true` loop because this Job is bound
+          # to come up before the CockroachDB Pods (due to the time needed to
+          # get PersistentVolumes attached to Nodes), and sleeping 5 seconds
+          # between attempts is much better than letting the Pod fail when
+          # the init command does and waiting out Kubernetes' non-configurable
+          # exponential back-off for Pod restarts.
+          # Command completes either when cluster initialization succeeds,
+          # or when cluster has been initialized already.
+          command:
+            - /bin/bash
+            - -c
+            - >-
+              while true; do
+              initOUT=$(set -x;
+              /cockroach/cockroach init
+              --insecure
+              --host=RELEASE-NAME-cockroachdb-0.RELEASE-NAME-cockroachdb:26257
+              2>&1);
+              initRC="$?";
+              echo $initOUT;
+              [[ "$initRC" == "0" ]] && exit 0;
+              [[ "$initOUT" == *"cluster has already been initialized"* ]] && exit 0;
+              sleep 5;
+              done

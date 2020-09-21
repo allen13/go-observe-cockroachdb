@@ -1,0 +1,12 @@
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: go-observe-cockroachdb
+  labels:
+    app: go-observe-cockroachdb
+spec:
+  selector:
+    matchLabels:
+      app: go-observe-cockroachdb
+  endpoints:
+  - port: http
