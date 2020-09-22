@@ -34,7 +34,7 @@ spec:
               initOUT=$(set -x;
               /cockroach/cockroach init
               --insecure
-              --host=RELEASE-NAME-cockroachdb-0.RELEASE-NAME-cockroachdb:26257
+              --host=cockroachdb-0.cockroachdb:26257
               2>&1);
               initRC="$?";
               echo $initOUT;
