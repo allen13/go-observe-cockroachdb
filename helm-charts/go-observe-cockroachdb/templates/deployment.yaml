@@ -19,6 +19,7 @@ spec:
   template:
     metadata:
       labels:
+        app: go-observe-cockroachdb
     spec:
       containers:
       - image: {{ .Values.image.repository }}:{{ .Values.image.tag }}

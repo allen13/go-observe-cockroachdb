@@ -1,0 +1,12 @@
+apiVersion: monitoring.coreos.com/v1
+kind: PrometheusRule
+metadata:
+  name: go-observe-cockroachdb
+spec:
+  groups:
+  - name: go-observe-cockroachdb.rules
+    rules:
+    # Borrowed from https://landing.google.com/sre/workbook/chapters/alerting-on-slos/
+    - record: job:slo_errors_per_request:ratio_rate10m
+      expr: sum(rate(fake_http_request_count{namespace="cockroachdb",code!="200"}[10m])) / sum(rate(fake_http_request_count{namespace="cockroachdb"}[10m]))
+      

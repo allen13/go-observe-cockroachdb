@@ -1,0 +1,16 @@
+apiVersion: route.openshift.io/v1
+kind: Route
+metadata:
+  labels:
+    app: go-observe-cockroachdb
+  name: go-observe-cockroachdb
+spec:
+  port:
+    targetPort: http
+  tls:
+    termination: edge
+  to:
+    kind: Service
+    name: go-observe-cockroachdb
+    weight: 100
+  wildcardPolicy: None

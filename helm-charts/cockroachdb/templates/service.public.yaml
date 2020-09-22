@@ -9,6 +9,7 @@ metadata:
   name: cockroachdb-public
   labels:
     app: cockroachdb
+    view: public
 spec:
   type: "LoadBalancer"
   ports:
