@@ -24,6 +24,19 @@ Understanding the state of your infrastructure and systems is essential for ensu
 deploy applications
 -------------------
 
+Create your namespace
+
+    oc new-project my-namespace
+    oc edit ns my-namespace
+
+Add label needed for Prometheus Operator resources
+
+    labels:
+      openshift.io/cluster-monitoring: "true"
+
+
+Install the appp
+
     oc login
     helm upgrade --install cockroachdb helm-charts/cockroachdb -n my-namespace
     helm upgrade --install go-observe-cockroachdb helm-charts/go-observe-cockroachdb -n my-namespace
