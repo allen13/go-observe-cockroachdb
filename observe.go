@@ -14,9 +14,9 @@ import (
 	"github.com/prometheus/client_golang/prometheus/promhttp"
 
 	opentracing "github.com/opentracing/opentracing-go"
+	"github.com/uber/jaeger-client-go"
 	"github.com/uber/jaeger-lib/metrics"
 
-	"github.com/uber/jaeger-client-go"
 	jaegercfg "github.com/uber/jaeger-client-go/config"
 	jaegerlog "github.com/uber/jaeger-client-go/log"
 )
@@ -66,6 +66,10 @@ func init() {
 func initTracer() {
 	// Sample configuration for testing. Use constant sampling to sample every trace
 	// and enable LogSpan to log every span via configured Logger.
+	traceHost, exists := os.LookupEnv("TRACE_HOST")
+	if !exists {
+		traceHost = "localhost"
+	}
 	cfg := jaegercfg.Configuration{
 		ServiceName: "observe_cockroachdb",
 		Sampler: &jaegercfg.SamplerConfig{
@@ -73,7 +77,8 @@ func initTracer() {
 			Param: 1,
 		},
 		Reporter: &jaegercfg.ReporterConfig{
-			LogSpans: true,
+			LogSpans:          true,
+			CollectorEndpoint: fmt.Sprintf("http://%s:14268/api/traces", traceHost),
 		},
 	}
 

@@ -30,3 +30,5 @@ spec:
         env:
         - name: PG_HOST
           value: cockroachdb-public
+        - name: TRACE_HOST
+          value: jaeger
