@@ -11,8 +11,6 @@ spec:
     matchLabels:
       app: cockroachdb
       view: public
-  namespaceSelector:
-    any: true
   endpoints:
   - port: http
     path: /_status/vars
