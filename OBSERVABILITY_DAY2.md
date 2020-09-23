@@ -66,7 +66,7 @@ Attempt to enable tracing on cockroachdb. The Zipkin port has already been setup
 
 How to log into the SQL shell
 
-    oc rsh cockroachdb
+    oc rsh cockroachdb-0
     cockroach sql --insecure
 
 * [cockroachdb tracing](https://wiki.crdb.io/wiki/spaces/CRDB/pages/73171339/Tracing+logs+with+Jaeger+and+Zipkin)
