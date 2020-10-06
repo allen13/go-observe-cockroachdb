@@ -24,6 +24,11 @@ Understanding the state of your infrastructure and systems is essential for ensu
 deploy applications
 -------------------
 
+Make sure the prometheus service account has cluster reader priviledges for the cluster in order to discover the pods running in each namespace:
+
+    oc adm policy add-cluster-role-to-user cluster-reader -z prometheus-k8s -n openshift-monitoring
+
+
 Create your namespace
 
     oc new-project my-namespace
