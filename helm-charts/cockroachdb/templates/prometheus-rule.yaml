@@ -7,4 +7,6 @@ spec:
   - name: cockroachdb.rules
     rules:
     - record: cockroachdb:capacity:utilizationPct
-      expr: capacity_used{store="1",namespace="cockroachdb"}/capacity{store="1",namespace="cockroachdb"}
+      expr: capacity_used{store="1",namespace="{{ .Release.Namespace }}"}/capacity{store="1",namespace="{{ .Release.Namespace }}"}
+    - alert: cockroachdb above capacity
+      expr: cockroachdb:capacity:utilizationPct > 0.80
