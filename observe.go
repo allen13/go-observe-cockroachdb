@@ -14,6 +14,7 @@ import (
 	"github.com/prometheus/client_golang/prometheus/promhttp"
 
 	opentracing "github.com/opentracing/opentracing-go"
+	
 	"github.com/uber/jaeger-client-go"
 	"github.com/uber/jaeger-lib/metrics"
 
@@ -148,7 +149,7 @@ func insertAccount(conn *pgx.Conn, parentSpan opentracing.Span) {
 		"insert",
 		opentracing.ChildOf(parentSpan.Context()),
 	)
-
+	
 	defer childSpan.Finish()
 	start := time.Now()
 
@@ -162,6 +163,7 @@ func insertAccount(conn *pgx.Conn, parentSpan opentracing.Span) {
 	randomMilliWait()
 
 	insertHistogram.Observe(time.Since(start).Seconds())
+
 }
 
 func selectAccounts(conn *pgx.Conn, parentSpan opentracing.Span) int {
@@ -175,6 +177,7 @@ func selectAccounts(conn *pgx.Conn, parentSpan opentracing.Span) int {
 	rows, err := conn.Query(context.Background(), "SELECT id, balance FROM accounts")
 	if err != nil {
 		log.Println(err)
+		child.Log("level","message")
 		return 0
 	}
 	defer rows.Close()

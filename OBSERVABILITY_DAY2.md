@@ -12,9 +12,9 @@ deploy applications
 Install the appp
 
     oc login
+    helm upgrade --install jaeger helm-charts/jaeger -n my-namespace
     helm upgrade --install cockroachdb helm-charts/cockroachdb -n my-namespace
     helm upgrade --install go-observe-cockroachdb helm-charts/go-observe-cockroachdb -n my-namespace
-    helm upgrade --install jaeger helm-charts/jaeger -n my-namespace
 
 tracing big picture
 -------------------
