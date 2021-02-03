@@ -9,7 +9,7 @@ Learning topics:
 deploy applications
 -------------------
 
-Install the appp
+Install the app
 
     oc login
     helm upgrade --install jaeger helm-charts/jaeger -n my-namespace
