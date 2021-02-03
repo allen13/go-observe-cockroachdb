@@ -17,6 +17,8 @@ spec:
       containers:
       - name: jaeger
         image: jaegertracing/all-in-one:latest
+        args:
+        - --collector.zipkin.host-port=9411
         env:
         - name: COLLECTOR_ZIPKIN_HTTP_PORT
           value: '9411'
