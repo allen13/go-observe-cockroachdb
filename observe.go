@@ -177,7 +177,6 @@ func selectAccounts(conn *pgx.Conn, parentSpan opentracing.Span) int {
 	rows, err := conn.Query(context.Background(), "SELECT id, balance FROM accounts")
 	if err != nil {
 		log.Println(err)
-		child.Log("level","message")
 		return 0
 	}
 	defer rows.Close()

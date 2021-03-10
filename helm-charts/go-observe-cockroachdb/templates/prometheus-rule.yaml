@@ -6,6 +6,11 @@ spec:
   groups:
   - name: go-observe-cockroachdb.rules
     rules:
+    - alert: Alert Name
+      expr: increase(fake_http_request_count{namespace="timothya"}[5m]) < 10
+      labels:
+        team: sre
+        severity: critical
     # Borrowed from https://landing.google.com/sre/workbook/chapters/alerting-on-slos/
     - record: job:slo_errors_per_request:ratio_rate10m
       expr: sum(rate(fake_http_request_count{namespace="{{ .Release.Namespace }}",code!="200"}[10m])) / sum(rate(fake_http_request_count{namespace="{{ .Release.Namespace }}"}[10m]))
